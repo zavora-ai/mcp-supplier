@@ -1,0 +1,249 @@
+server_id = "mcp_supplier"
+display_name = "Supplier (SRM)"
+version = "1.0.0"
+domain = "procurement"
+sdk_version = "0.1.0"
+risk_level = "high"
+writes_allowed = "gated"
+transports = ["stdio"]
+credentials = []
+governance_gates = []
+environments = ["development", "staging", "production"]
+
+[[tools]]
+name = "create_supplier"
+description = "Register a new supplier (prospect, not yet PO-approved)"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "get_supplier"
+description = "Get a supplier by id"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_suppliers"
+description = "List suppliers by category/status"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "set_supplier_status"
+description = "Set supplier lifecycle status (suspend/disqualify revokes PO approval)"
+risk_class = "internal_write"
+requires_approval = true
+credential_bindings = []
+
+[[tools]]
+name = "set_qualification"
+description = "Set qualification status (qualifying approves the supplier for POs)"
+risk_class = "internal_write"
+requires_approval = true
+credential_bindings = []
+
+[[tools]]
+name = "add_contact"
+description = "Add a contact to a supplier"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_contacts"
+description = "List a supplier's contacts"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "add_certification"
+description = "Add a certification (ISO 9001, IATF 16949, ISO 22000, ...)"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_certifications"
+description = "List a supplier's certifications"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "expiring_certifications"
+description = "Certifications expiring within N days (compliance watchlist)"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "create_item"
+description = "Create a catalog item / internal SKU"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_items"
+description = "List catalog items by category"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "set_supplier_item"
+description = "Set a supplier's offer (price/MOQ/lead time/availability) for an item"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "find_item_sources"
+description = "Rank supplier sources for an item by price/availability/lead time"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "create_po"
+description = "Create and issue a purchase order (refused if supplier not PO-approved)"
+risk_class = "external_write"
+requires_approval = true
+credential_bindings = []
+
+[[tools]]
+name = "get_po"
+description = "Get a purchase order by id"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_pos"
+description = "List purchase orders by supplier/status"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "receive_po"
+description = "Record receipt of PO lines (updates status)"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "cancel_po"
+description = "Cancel a purchase order (not allowed once received)"
+risk_class = "external_write"
+requires_approval = true
+credential_bindings = []
+
+[[tools]]
+name = "create_rfq"
+description = "Open an RFQ for an item, inviting suppliers"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "submit_quote"
+description = "Submit a supplier quote against an RFQ"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "compare_quotes"
+description = "Compare quotes for an RFQ, cheapest first"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "award_rfq"
+description = "Award an RFQ to a supplier (closes the RFQ)"
+risk_class = "internal_write"
+requires_approval = true
+credential_bindings = []
+
+[[tools]]
+name = "record_audit"
+description = "Record a quality audit; auto-scores and auto-raises a SCAR on failure"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_audits"
+description = "List a supplier's quality audits"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "raise_scar"
+description = "Raise a Supplier Corrective Action Request"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "update_scar"
+description = "Update a SCAR (status, root cause, corrective action)"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "list_scars"
+description = "List a supplier's SCARs"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "record_quality_event"
+description = "Record a quality/delivery event feeding the scorecard"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "scorecard"
+description = "Performance scorecard: OTD, quality rate, PPM, composite rating"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "assess_risk"
+description = "Record a risk assessment (likelihood × impact)"
+risk_class = "internal_write"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "risk_profile"
+description = "Composite risk profile for a supplier with signals"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "monitor_risks"
+description = "Portfolio risk monitor: suppliers at/above a minimum risk level"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []
+
+[[tools]]
+name = "audit_log"
+description = "Recent platform audit-trail entries"
+risk_class = "read_only"
+requires_approval = false
+credential_bindings = []

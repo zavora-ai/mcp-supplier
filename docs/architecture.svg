@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 470" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#0f766e"/><stop offset="100%" style="stop-color:#1d4ed8"/></linearGradient>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+  </defs>
+  <rect width="780" height="470" fill="#f8fafc" rx="12"/>
+  <rect x="225" y="10" width="330" height="28" rx="8" fill="url(#hg)"/>
+  <text x="390" y="29" text-anchor="middle" fill="white" font-size="12" font-weight="bold">mcp-supplier — Supplier Relationship Management</text>
+
+  <!-- agents -->
+  <rect x="40" y="48" width="700" height="42" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="1.5"/>
+  <text x="390" y="62" text-anchor="middle" font-size="9" font-weight="bold" fill="#065f46">Procurement &amp; Supply-Chain Agents (clients of the SRM platform)</text>
+  <text x="390" y="79" text-anchor="middle" font-size="6.8" fill="#047857">Supplier Quality Audit · Recipe Cost Optimizer · Supplier Risk Monitor · Inventory Shortage Resolver · Supplier Quality · Inventory Replenishment</text>
+  <line x1="390" y1="90" x2="390" y2="106" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- tools -->
+  <rect x="30" y="110" width="720" height="118" rx="10" fill="white" stroke="#1d4ed8" stroke-width="2"/>
+  <rect x="30" y="110" width="720" height="22" rx="10" fill="url(#hg)"/>
+  <text x="390" y="125" text-anchor="middle" fill="white" font-size="10" font-weight="bold">34 Tools — SRM / procurement platform</text>
+  <g font-size="7.3" font-weight="bold" fill="#065f46" text-anchor="middle">
+    <text x="100" y="148">Suppliers (7)</text>
+    <text x="245" y="148">Catalog/Source (4)</text>
+    <text x="390" y="148">Purchase Orders (5)</text>
+    <text x="540" y="148">RFQ/Quotes (4)</text>
+    <text x="680" y="148">Quality (7)</text>
+  </g>
+  <g font-size="6.3" fill="#1e40af" text-anchor="middle">
+    <text x="100" y="163">create · status*</text>
+    <text x="100" y="173">qualify* · contacts</text>
+    <text x="245" y="163">item · supplier_item</text>
+    <text x="245" y="173">find_item_sources</text>
+    <text x="390" y="163">create_po*† · receive</text>
+    <text x="390" y="173">cancel_po*† · list</text>
+    <text x="540" y="163">rfq · quote</text>
+    <text x="540" y="173">compare · award*</text>
+    <text x="680" y="163">audit · scar</text>
+    <text x="680" y="173">event · scorecard</text>
+  </g>
+  <g font-size="7.3" font-weight="bold" fill="#065f46" text-anchor="middle">
+    <text x="180" y="196">Certifications (3)</text>
+    <text x="430" y="196">Risk &amp; Audit (4)</text>
+  </g>
+  <g font-size="6.3" fill="#1e40af" text-anchor="middle">
+    <text x="180" y="210">add · list · expiring</text>
+    <text x="430" y="210">assess · risk_profile · monitor_risks · audit_log</text>
+  </g>
+  <text x="390" y="223" text-anchor="middle" font-size="6" fill="#64748b">* requires approval   † external write (commits spend)</text>
+  <line x1="390" y1="228" x2="390" y2="244" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- engines -->
+  <rect x="30" y="248" width="720" height="86" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="390" y="263" text-anchor="middle" font-size="9" font-weight="bold" fill="#92400e">Domain engines</text>
+  <g font-size="7" fill="#78350f" text-anchor="middle">
+    <text x="130" y="282" font-weight="bold">PO-approval gate</text>
+    <text x="130" y="294">qualified + active</text>
+    <text x="130" y="305">→ approved_for_po</text>
+    <text x="320" y="282" font-weight="bold">Sourcing engine</text>
+    <text x="320" y="294">rank by price /</text>
+    <text x="320" y="305">availability / lead time</text>
+    <text x="510" y="282" font-weight="bold">Quality engine</text>
+    <text x="510" y="294">auto-score audit →</text>
+    <text x="510" y="305">auto-SCAR · scorecard</text>
+    <text x="670" y="282" font-weight="bold">Risk engine</text>
+    <text x="670" y="294">L×I + signals →</text>
+    <text x="670" y="305">portfolio monitor</text>
+  </g>
+  <line x1="390" y1="334" x2="390" y2="350" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- store -->
+  <rect x="30" y="354" width="720" height="64" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="390" y="370" text-anchor="middle" font-size="9" font-weight="bold" fill="#334155">In-memory store (thread-safe) + append-only audit trail</text>
+  <g font-size="6.6" fill="#475569" text-anchor="middle">
+    <text x="390" y="386">suppliers · contacts · certifications · items · supplier_items · purchase_orders · rfqs · quotes</text>
+    <text x="390" y="399">audits · findings · scars · quality_events · risk_assessments · audit_log</text>
+    <text x="390" y="412" fill="#64748b">SUP · CON · CRT · ITM · SIT · PO · RFQ · QUO · AUD · SCAR · QE · RSK</text>
+  </g>
+
+  <text x="390" y="440" text-anchor="middle" font-size="8" fill="#0f766e" font-weight="bold">adk-mcp-sdk · rmcp 1.7 · stdio transport · registry-ready manifest</text>
+  <text x="390" y="456" text-anchor="middle" font-size="7" fill="#94a3b8">Apache-2.0 · zavora-ai/mcp-supplier</text>
+</svg>
