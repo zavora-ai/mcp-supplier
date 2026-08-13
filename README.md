@@ -104,7 +104,7 @@ cd mcp-supplier && cargo build --release
 ```toml
 server_id = "mcp_supplier"
 display_name = "Supplier (SRM)"
-version = "1.0.0"
+version = "1.1.0"
 domain = "procurement"
 risk_level = "high"
 writes_allowed = "gated"
