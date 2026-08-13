@@ -1,249 +1,249 @@
 server_id = "mcp_supplier"
-display_name = "Supplier (SRM)"
-version = "1.0.0"
+display_name = "Supplier"
+version = "1.1.0"
 domain = "procurement"
-sdk_version = "0.1.0"
+sdk_version = "0.2.0"
 risk_level = "high"
 writes_allowed = "gated"
 transports = ["stdio"]
 credentials = []
-governance_gates = []
+governance_gates = ["mrtr_approval"]
 environments = ["development", "staging", "production"]
 
 [[tools]]
 name = "create_supplier"
-description = "Register a new supplier (prospect, not yet PO-approved)"
+description = "Register a new supplier (starts as an unqualified prospect, not yet approved for POs)."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "get_supplier"
-description = "Get a supplier by id"
+description = "Get a supplier by id."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_suppliers"
-description = "List suppliers by category/status"
+description = "List suppliers, optionally filtered by category and/or status."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "set_supplier_status"
-description = "Set supplier lifecycle status (suspend/disqualify revokes PO approval)"
+description = "Set a supplier's lifecycle status (prospect/active/on_hold/suspended/disqualified). Suspending or disqualifying revokes PO approval. Gated."
 risk_class = "internal_write"
 requires_approval = true
 credential_bindings = []
 
 [[tools]]
 name = "set_qualification"
-description = "Set qualification status (qualifying approves the supplier for POs)"
+description = "Set a supplier's qualification status. Becoming qualified/conditionally-qualified approves the supplier for POs. Gated."
 risk_class = "internal_write"
 requires_approval = true
 credential_bindings = []
 
 [[tools]]
 name = "add_contact"
-description = "Add a contact to a supplier"
+description = "Add a contact to a supplier."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_contacts"
-description = "List a supplier's contacts"
+description = "List a supplier's contacts."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "add_certification"
-description = "Add a certification (ISO 9001, IATF 16949, ISO 22000, ...)"
+description = "Add a certification (e.g. ISO 9001, IATF 16949, ISO 22000) to a supplier."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_certifications"
-description = "List a supplier's certifications"
+description = "List a supplier's certifications (soonest expiry first)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "expiring_certifications"
-description = "Certifications expiring within N days (compliance watchlist)"
+description = "List certifications expiring within N days (default 90) across all suppliers — compliance watchlist."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "create_item"
-description = "Create a catalog item / internal SKU"
+description = "Create a catalog item (an internal part/SKU sources can offer)."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_items"
-description = "List catalog items by category"
+description = "List catalog items, optionally by category."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "set_supplier_item"
-description = "Set a supplier's offer (price/MOQ/lead time/availability) for an item"
+description = "Set/replace a supplier's offer (price, MOQ, lead time, availability) for a catalog item."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "find_item_sources"
-description = "Rank supplier sources for an item by price/availability/lead time"
+description = "Find and rank supplier sources for an item by price/availability/lead time. qualified_only (default true) restricts to PO-approved suppliers. Powers replenishment, shortage-resolution, and cost optimization."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "create_po"
-description = "Create and issue a purchase order (refused if supplier not PO-approved)"
+description = "Create and issue a purchase order. Refused if the supplier is not approved for POs. External write — gated."
 risk_class = "external_write"
 requires_approval = true
 credential_bindings = []
 
 [[tools]]
 name = "get_po"
-description = "Get a purchase order by id"
+description = "Get a purchase order by id."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_pos"
-description = "List purchase orders by supplier/status"
+description = "List purchase orders, optionally by supplier and/or status."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "receive_po"
-description = "Record receipt of PO lines (updates status)"
+description = "Record receipt of PO lines (updates received quantities and PO status)."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "cancel_po"
-description = "Cancel a purchase order (not allowed once received)"
+description = "Cancel a purchase order (not allowed once fully received). Gated."
 risk_class = "external_write"
 requires_approval = true
 credential_bindings = []
 
 [[tools]]
 name = "create_rfq"
-description = "Open an RFQ for an item, inviting suppliers"
+description = "Open an RFQ (request for quote) for an item, inviting suppliers."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "submit_quote"
-description = "Submit a supplier quote against an RFQ"
+description = "Submit a supplier quote against an open RFQ."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "compare_quotes"
-description = "Compare quotes for an RFQ, cheapest first"
+description = "Compare quotes for an RFQ, cheapest first."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "award_rfq"
-description = "Award an RFQ to a supplier (closes the RFQ)"
+description = "Award an RFQ to a supplier (closes the RFQ). Gated."
 risk_class = "internal_write"
 requires_approval = true
 credential_bindings = []
 
 [[tools]]
 name = "record_audit"
-description = "Record a quality audit; auto-scores and auto-raises a SCAR on failure"
+description = "Record a supplier quality audit with findings; auto-scores, sets pass/conditional/fail, and auto-raises a SCAR on failure."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_audits"
-description = "List a supplier's quality audits"
+description = "List a supplier's quality audits (most recent first)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "raise_scar"
-description = "Raise a Supplier Corrective Action Request"
+description = "Raise a Supplier Corrective Action Request (SCAR)."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "update_scar"
-description = "Update a SCAR (status, root cause, corrective action)"
+description = "Update a SCAR (status, root cause, corrective action). Closing stamps closed_at."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "list_scars"
-description = "List a supplier's SCARs"
+description = "List a supplier's SCARs (set open_only=true to exclude closed)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "record_quality_event"
-description = "Record a quality/delivery event feeding the scorecard"
+description = "Record a quality/delivery event (receipt/nonconformance/return/complaint) — feeds the performance scorecard."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "scorecard"
-description = "Performance scorecard: OTD, quality rate, PPM, composite rating"
+description = "Performance scorecard: on-time delivery, quality rate, defect PPM, open SCARs, latest audit score, composite rating (A–D)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "assess_risk"
-description = "Record a risk assessment (likelihood × impact)"
+description = "Record a risk assessment (likelihood 1–5 × impact 1–5) for a supplier."
 risk_class = "internal_write"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "risk_profile"
-description = "Composite risk profile for a supplier with signals"
+description = "Risk profile for a supplier: composite level from assessments plus signals (qualification, expired certs, open SCARs, single-source exposure)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "monitor_risks"
-description = "Portfolio risk monitor: suppliers at/above a minimum risk level"
+description = "Portfolio risk monitor: all suppliers at/above a minimum risk level (default 3=medium), most severe first. Powers the Supplier Risk Monitor."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []
 
 [[tools]]
 name = "audit_log"
-description = "Recent platform audit-trail entries"
+description = "Recent audit-trail entries across the platform (most recent first)."
 risk_class = "read_only"
 requires_approval = false
 credential_bindings = []

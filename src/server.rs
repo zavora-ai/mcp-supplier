@@ -130,7 +130,7 @@ fn dfifty() -> usize { 50 }
 #[derive(Clone)]
 pub struct SupplierServer { pub store: Arc<SupplierStore> }
 
-#[tool_router(server_handler)]
+#[tool_router]
 impl SupplierServer {
     // suppliers
     #[tool(description = "Register a new supplier (starts as an unqualified prospect, not yet approved for POs).")]
@@ -356,4 +356,11 @@ impl HealthCheck for SupplierServer {
     async fn check_health(&self) -> HealthStatus {
         HealthStatus { healthy: true, message: Some("operational".into()), latency_ms: Some(1) }
     }
+}
+
+adk_mcp_sdk::mcp_2026_server! {
+    server: SupplierServer,
+    task_tools: [],
+    approval_tools: ["set_supplier_status", "set_qualification", "create_po", "cancel_po", "award_rfq"],
+    cache_ttl_ms: 60_000,
 }
